@@ -1,13 +1,7 @@
 const express = require('express'),
-  mongoose = require('mongoose'),
-  bodyParser = require('body-parser'),
-  Cafeteria = require('./API/models/cafeteriaModel');
+  bodyParser = require('body-parser');
 
-const uri = "mongodb+srv://admin-user:fincWmLiDp7zusYe@payimt-ogffp.mongodb.net/pay_imt?retryWrites=true&w=majority";
 const app = express();
-
-mongoose.Promise = global.Promise;
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
