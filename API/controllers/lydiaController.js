@@ -2,8 +2,10 @@ const LydiaConfiguration = require('../configuration/LydiaConfiguration');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
 
+const URL_LYDIA_PROD = LydiaConfiguration.LydiaConfiguration.URL_LYDIA_PROD;
+
 exports.paymentRequest_do = function(amount, phoneNumber, message) {
-  const url = LydiaConfiguration.LydiaConfiguration.URL_LYDIA_PROD + '/api/request/do.json';
+  const url = URL_LYDIA_PROD + '/api/request/do.json';
 
   let formData = new FormData()
   formData.append('amount', amount)
@@ -24,4 +26,36 @@ exports.paymentRequest_do = function(amount, phoneNumber, message) {
   }).then((response) => { return response.json() })
     .catch((error) => console.error(error))
 
+}
+
+exports.paymentRequest_cancel = function(request_id) {
+  const url = URL_LYDIA_PROD + '/api/request/cancel.json';
+
+  let formData = new FormData()
+  formData.append('request_id', request_id);
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json'
+    },
+    body: formData
+  }).then((response) => { return response.json() })
+    .catch((error) => console.error(error))
+}
+
+exports.paymentCheckState = function(request_uuid) {
+  const url = URL_LYDIA_PROD + '/api/request/state.json';
+
+  let formData = new FormData()
+  formData.append('request_uuid', request_uuid);
+
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json'
+    },
+    body: formData
+  }).then((response) => { return response.json() })
+    .catch((error) => console.error(error))
 }
