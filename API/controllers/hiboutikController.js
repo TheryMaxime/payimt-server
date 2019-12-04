@@ -19,7 +19,8 @@ const urlencoded_header = {
 }
 
 const search_customer = function(phoneNumber) {
-  const url = URL_HIBOUTIK + '/customers/search/?phone=%2B33633739225'
+  phoneNumber.replace('+', "%2B");
+  const url = URL_HIBOUTIK + '/customers/search/?phone=' + phoneNumber;
   return fetch(url, {
     method: 'GET',
     headers: json_header
