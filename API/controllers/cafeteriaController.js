@@ -53,7 +53,6 @@ exports.request_payment = function(req, res) {
         if (index < 5) {
           checkPaymentStatus(request_response.request_uuid)
             .then((check_response) => {
-              console.log(check_response)
               switch(check_response.state) {
                 case '1':
                   //request accepted
