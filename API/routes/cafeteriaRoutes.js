@@ -3,5 +3,5 @@ module.exports = function(app) {
 
   app.route('/cafeteria')
     .get(cafeteria.get_all_items)
-    .post(cafeteria.create_item);
+    .post(cafeteria.request_payment);
 };
