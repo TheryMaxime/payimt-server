@@ -82,8 +82,56 @@ exports.createSale = function(phoneNumber, cart){ // customer ID recupéré par 
           return sale;
         })
       })
-      .catch((error) => { console.log(error) })
+      .catch((error) => { console.error(error) })
   })
-  .catch((error) => { console.log(error) })
+  .catch((error) => { console.error(error) })
 
+}
+
+exports.customerExists = function(phoneNumber) {
+  return search_customer(phoneNumber)
+    .then((customer) => {
+      if (customer.length === 1)
+        return {
+          customerExists: true,
+          customer: customer[0]
+        }
+      else {
+        return { customerExists: false }
+      }
+    })
+    .catch((error) => { console.error(error) })
+}
+
+exports.register = function(phoneNumber, firstname, lastname) {
+  const url = URL_HIBOUTIK + '/customers/'
+
+  let data = new URLSearchParams()
+  data.append('customers_phone_number', phoneNumber);
+  data.append('customers_first_name', firstname);
+  data.append('customers_last_name', lastname);
+
+  return fetch(url, {
+    method:'POST',
+    headers: urlencoded_header,
+    body: data
+  })
+  .then((response) => { return response.json() })
+  .catch((error) => console.error(error))
+}
+
+exports.updateCustomer = function(customers_id, customers_attribute, new_value) {
+  const url = URL_HIBOUTIK + '/customer/' + customers_id + '/'
+
+  let data = new URLSearchParams()
+  data.append('customers_attribute', customers_attribute);
+  data.append('new_value', new_value);
+
+  return fetch(url, {
+    method:'PUT',
+    headers: urlencoded_header,
+    body: data
+  })
+  .then((response) => { return response.json() })
+  .catch((error) => console.error(error))
 }
