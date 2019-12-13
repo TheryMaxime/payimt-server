@@ -13,8 +13,12 @@ Ensuite tapez les commandes suivantes :
 
 ```bash
 cd NomDuProjet
+npm install # installer les dépendances
 npm run start
 ```
 
 Une fois le serveur lancé vous devriez voir apparaître une ligne verte sur le terminal avec indiqué "starting `node app.js`"
-Dès lors, vous pouvez passez à la partie Front, afin de tester l'application via son interface utilisateur.
+Dès lors, vous pouvez passez à la partie Front (https://github.com/TheryMaxime/payimt-device), afin de tester l'application via son interface utilisateur.
+
+## Modifications
+Dès lors que le serveur est lancé, vous pouvez faire des modifications dans le code source sans avoir à le relancer.
