@@ -12,7 +12,6 @@ exports.paymentRequest_do = function(amount, phoneNumber, message) {
   formData.append('payment_method', 'lydia')
   formData.append('vendor_token', LydiaConfiguration.LydiaConfiguration.API_PUBLIC_TOKEN_PROD)
   formData.append('message', message)
-  //formData.append('user_token', NUM_LYDIA_TEST)
   formData.append('recipient', phoneNumber)
   formData.append('currency', 'EUR')
   formData.append('type', 'phone')
@@ -24,7 +23,7 @@ exports.paymentRequest_do = function(amount, phoneNumber, message) {
     },
     body: formData
   }).then((response) => { return response.json() })
-    .catch((error) => console.error(error))
+  .catch((error) => console.error(error))
 
 }
 
@@ -41,7 +40,7 @@ exports.paymentRequest_cancel = function(request_id) {
     },
     body: formData
   }).then((response) => { return response.json() })
-    .catch((error) => console.error(error))
+  .catch((error) => console.error(error))
 }
 
 exports.paymentCheckState = function(request_uuid) {
@@ -57,5 +56,5 @@ exports.paymentCheckState = function(request_uuid) {
     },
     body: formData
   }).then((response) => { return response.json() })
-    .catch((error) => console.error(error))
+  .catch((error) => console.error(error))
 }
