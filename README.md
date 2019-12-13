@@ -13,7 +13,7 @@ Ensuite tapez les commandes suivantes :
 
 ```bash
 cd NomDuProjet
-npm   # installer les dépendances
+npm install  # installer les dépendances
 npm run start
 ```
 
