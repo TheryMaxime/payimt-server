@@ -22,3 +22,21 @@ Dès lors, vous pouvez passez à la partie Front (https://github.com/TheryMaxime
 
 ## Modifications
 Dès lors que le serveur est lancé, vous pouvez faire des modifications dans le code source sans avoir à le relancer.
+
+## LydiaConfiguration
+
+exports.LydiaConfiguration = {
+  API_PUBLIC_TOKEN_PROD : "SECRET_KEY",
+  API_PRIVATE_TOKEN_PRO : "SECRET_KEY",
+  API_PUBLIC_TOKEN_TESTS : "SECRET_KEY",
+  API_PRIVATE_TOKEN_TESTS : "SECRET_KEY",
+  URL_LYDIA_TEST : "https://homologation.lydia-app.com",
+  URL_LYDIA_PROD : "https://lydia-app.com"
+}
+
+## HiboutikConfiguration
+
+exports.HiboutikConfiguration = {
+  BASIC_AUTH_AUTHORIZATION : "SECRET_KEY",
+  URL_HIBOUTIK : "https://ADRESSE_SERVEUR.hiboutik.com/api"
+}
