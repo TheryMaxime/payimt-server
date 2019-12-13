@@ -19,6 +19,7 @@ const urlencoded_header = {
 }
 
 const search_customer = function(phoneNumber) {
+  //Sign '+' as to be replace by '%2B' in a HTML request
   phoneNumber.replace('+', "%2B");
   const url = URL_HIBOUTIK + '/customers/search/?phone=' + phoneNumber;
   return fetch(url, {
@@ -67,40 +68,47 @@ exports.getAllItemsFromHiboutik = function(){
     method:'GET',
     headers: json_header
   })
-  .then((response) => { return response.json()}) // a récuperer pour mettre comme data de la flatlist. Modifier le shop detail pour afficher product_model, product_price
+  .then((response) => { return response.json()})
   .catch((error) => console.error(error));
 }
 
-exports.createSale = function(phoneNumber, cart){ // customer ID recupéré par createCustomer ou alors par le getCustomer
+exports.createSale = function(phoneNumber, cart){
+  //We have to search customer_id from customer's phoneNumber
   return search_customer(phoneNumber)
   .then((customer) => {
+    //Then we create an empty sale
+    //NB: As we create customer acount from phoneNumber, there is only one
+    //    acount for one phone number
     create_empty_sale(customer[0].customers_id)
-      .then((sale) => {
-        cart.forEach(item => {
-          add_product_to_sale(item, sale.sale_id)
-            .catch((error) => console.error(error));
-          return sale;
-        })
+    .then((sale) => {
+      //Then we add every cart's item to the sale
+      cart.forEach(item => {
+        add_product_to_sale(item, sale.sale_id)
+        .catch((error) => console.error(error));
+        //We return the sale object in order to do action on it afterwise
+        return sale;
       })
-      .catch((error) => { console.error(error) })
+    })
+    .catch((error) => { console.error(error) })
   })
   .catch((error) => { console.error(error) })
 
 }
 
 exports.customerExists = function(phoneNumber) {
+  //We have to search customer_id from customer's phoneNumber
   return search_customer(phoneNumber)
-    .then((customer) => {
-      if (customer.length === 1)
-        return {
-          customerExists: true,
-          customer: customer[0]
-        }
-      else {
-        return { customerExists: false }
-      }
-    })
-    .catch((error) => { console.error(error) })
+  .then((customer) => {
+    if (customer.length === 1)
+    return {
+      customerExists: true,
+      customer: customer[0]
+    }
+    else {
+      return { customerExists: false }
+    }
+  })
+  .catch((error) => { console.error(error) })
 }
 
 exports.register = function(phoneNumber, firstname, lastname) {
